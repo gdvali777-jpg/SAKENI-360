@@ -33,9 +33,18 @@
 <script src="pannellum.js"></script>
 <script>
   var VIEWS = [1,2,3,4];
-  function scene(img){ return { type:'equirectangular', panorama:img, hfov:100 }; }
+  function scene(base){
+    return {
+      type:'multires',
+      multiRes:{
+        basePath:base, path:'/%l/%s%y_%x', fallbackPath:'/fallback/%s',
+        extension:'jpg', tileResolution:512, maxLevel:4, cubeResolution:2600
+      },
+      hfov:100
+    };
+  }
   var scenes = {};
-  VIEWS.forEach(function(n){ scenes['view'+n] = scene('view'+n+'.jpg'); });
+  VIEWS.forEach(function(n){ scenes['view'+n] = scene('view'+n); });
   var viewer = pannellum.viewer('pano', {
     default:{
       firstScene:'view1', autoLoad:true, autoRotate:-2, autoRotateInactivityDelay:3500,
