@@ -31,13 +31,13 @@
 </head>
 <body>
 <div id="pano"></div>
-<a id="bgp-logo-link" class="bgp-logo-link" href="https://biograpi.ge/ka/sa/apartments?view=grid" aria-label="SAKENI by Biograpi"><img class="bare-logo" src="logo.png" alt="SAKENI by Biograpi"></a>
+<a id="bgp-logo-link" class="bgp-logo-link" href="https://biograpi.ge/ka/sakeni" aria-label="SAKENI by Biograpi"><img class="bare-logo" src="logo.png" alt="SAKENI by Biograpi"></a>
 <script>
 /* BGP logo link v1: logo opens the project grid on biograpi.ge in the visitor's language.
    Language comes from ?lang=ka|en|ru (added to the 360 links on biograpi.ge by GTM),
    then from sessionStorage, else ka. Without JS the static href (ka) still works. */
 (function () {
-  var PATH = "sa/apartments?view=grid";
+  var PATH = "sakeni";
   var a = document.getElementById("bgp-logo-link");
   if (!a) return;
   var lang = "ka", m = /[?&]lang=(ka|en|ru)(?:&|$)/.exec(location.search);
