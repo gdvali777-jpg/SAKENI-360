@@ -2,6 +2,36 @@
 <html lang="ka">
 <head>
 <meta charset="utf-8">
+<script>
+/* Strip GTM Conversion Linker query keys so the address bar is shareable.
+   Drops _gl, gclid, dclid, gbraid, wbraid, gclsrc, and any _gcl_* key.
+   Keeps lang and every other param, and the hash. replaceState only — no reload.
+   Runs before the logo-language script, which still reads ?lang= from the cleaned URL. */
+(function () {
+  try {
+    var search = location.search;
+    if (!search || search.length < 2) return;
+    var named = {
+      "_gl": 1, "gclid": 1, "dclid": 1, "gbraid": 1, "wbraid": 1, "gclsrc": 1
+    };
+    var parts = search.substring(1).split("&");
+    var keep = [];
+    var dropped = false;
+    for (var i = 0; i < parts.length; i++) {
+      var part = parts[i];
+      if (!part) continue;
+      var eq = part.indexOf("=");
+      var rawKey = eq === -1 ? part : part.substring(0, eq);
+      var key = rawKey;
+      try { key = decodeURIComponent(rawKey.replace(/\+/g, " ")).toLowerCase(); } catch (e) {}
+      if (named[key] || key.indexOf("_gcl_") === 0) { dropped = true; continue; }
+      keep.push(part);
+    }
+    if (!dropped) return;
+    history.replaceState(history.state, "", location.pathname + (keep.length ? "?" + keep.join("&") : "") + location.hash);
+  } catch (e) {}
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Sakeni 360° | Biograpi Living</title>
 <link rel="stylesheet" href="pannellum.css">
